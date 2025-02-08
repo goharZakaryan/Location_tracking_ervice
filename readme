@@ -1,0 +1,41 @@
+Location Tracking Service
+
+This service tracks location updates and generates location reports for users.
+
+    Tools Used:
+        Spring Boot: For building the REST API.
+        Kafka: Used for processing real-time location data and communication between services.
+        PostgreSQL: Database to store location data.
+        Spring Kafka: Kafka integration with Spring Boot for producing and consuming messages.
+        Scheduled Tasks: For periodically generating reports based on user data.
+
+    Features:
+        Update Location: Post location updates to the service, which are then sent to Kafka.
+        Generate Location Report: Get a report of total distance traveled and other metrics for a user within a time range.
+
+    How It Works:
+       Location Updates: Send POST requests to /api/locations with location data (latitude, longitude, timestamp, userId). This will be processed and sent to Kafka for further handling.
+       Generate Report: Send GET requests to /api/locations/report/{userId} with startTime and endTime as query parameters to get a report for the specified user.
+
+    Kafka Integration:
+        The service produces location updates to a Kafka topic (location-updates) for further processing or analytics.
+        The service listens for updates from Kafka to process and react to real-time location data.
+
+  Example Usage:
+    Post Location Update:
+
+        POST /api/locations
+        Body: {
+            "latitude": 52.5200,
+            "longitude": 13.4050,
+            "timestamp": "2025-02-08T15:30:00",
+            "userId": "user123"
+        }
+        Generate Report:
+            GET
+            /api/locations/report/user123?startTime=2025-02-01T00:00:00&endTime=2025-02-08T00:00:00
+
+    How to Run:
+        Set up PostgreSQL and configure the database connection in application.properties.
+        Set up Kafka and ensure it is running on localhost:9092.
+        Build and run the Spring Boot application.
