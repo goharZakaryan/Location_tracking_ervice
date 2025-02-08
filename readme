@@ -8,7 +8,7 @@ This service tracks location updates and generates location reports for users.
         PostgreSQL: Database to store location data.
         Spring Kafka: Kafka integration with Spring Boot for producing and consuming messages.
         Scheduled Tasks: For periodically generating reports based on user data.
-
+        JUnit, H2 database & Mockito: Used for unit testing the repository, service, and controller layers.
     Features:
         Update Location: Post location updates to the service, which are then sent to Kafka.
         Generate Location Report: Get a report of total distance traveled and other metrics for a user within a time range.
